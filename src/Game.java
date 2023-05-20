@@ -34,7 +34,8 @@ public class Game
 
   public void Shuffle()
   {
-    for (int i = 0; i < NUMBER_OFF_TIMES_TO_SHUFFLE; i++)
+    int i = 0;
+    while (i != NUMBER_OFF_TIMES_TO_SHUFFLE)
     {
       Random random = new Random();
       int r = random.nextInt(DECK_SIZE - MIN_DECK_SIZE) + MIN_DECK_SIZE;
@@ -42,6 +43,7 @@ public class Game
       Card card = deck[r];
       deck[r] = deck[j];
       deck[j] = card;
+      i++;
     }
   }
 
@@ -49,6 +51,7 @@ public class Game
   {
     for (Hand hand : players)
     {
+      hand.sortHand();
       hand.getHandValue();
     }
   }
@@ -57,11 +60,11 @@ public class Game
   {
     Shuffle();
     int deck_count = 0;
-    for (int z = 0; z < handSize; z++)
+    for (int i = 0; i < handSize; i++)
     {
       for (Hand hand : players)
       {
-        hand.setCard(z,deck[deck_count]);
+        hand.setCard(i,deck[deck_count]);
         deck_count++;
       }
     }
