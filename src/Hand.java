@@ -15,12 +15,21 @@ public class Hand
 
   public Hand(int handSize)
   {
-    this.handSize = handSize;
-    this.hands = new ArrayList<>(handSize);
-    for (int j = 0; j < handSize; j++)
+
+    try
     {
-      hands.add(new Card());
+      this.handSize = handSize;
+      this.hands = new ArrayList<>(handSize);
+      for (int j = 0; handSize > j; j++)
+      {
+        hands.add(new Card());
+      }
     }
+    catch (IllegalArgumentException e)
+    {
+      throw new IllegalArgumentException("Invalid Size.");
+    }
+
   }
 
   /**
@@ -29,21 +38,28 @@ public class Hand
    */
   public void setCard(int index, Card newCard)
   {
-    if (index < this.handSize)
+    try
     {
-      Card card = hands.get(index);
-      if (card == null)
+      if (index < this.handSize)
       {
-        hands.add(index, newCard);
+        Card card = hands.get(index);
+        if (card == null)
+        {
+          hands.add(index, newCard);
+        }
+        else
+        {
+          this.hands.set(index, newCard);
+        }
       }
       else
       {
-        this.hands.set(index, newCard);
+        System.out.println("the hand you want to replace does not exist");
       }
     }
-    else
+    catch (IndexOutOfBoundsException e)
     {
-      System.out.println("the hand you want to replace does not exist");
+      throw new IndexOutOfBoundsException("index that you trying to set is not available");
     }
   }
 
@@ -100,24 +116,22 @@ public class Hand
    */
   private void checkKindTypes(int sameKind)
   {
-    if (sameKind > 0)
+    switch (sameKind)
     {
-      if (sameKind == 2)
-      {
+      case 2:
         threeOffAKind = true;
-      }
-      else if (sameKind == 1)
-      {
+        break;
+      case 1:
         if (twoOffAKind)
         {
           doubleTwoOffAKind = true;
         }
         twoOffAKind = true;
-      }
-      else if (sameKind == 3)
-      {
+        break;
+      case 3:
         fourOffAKind = true;
-      }
+        break;
+
     }
   }
 
