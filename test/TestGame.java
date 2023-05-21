@@ -1,8 +1,9 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestGame
 {
-  @org.junit.jupiter.api.Test
+  @Test
   public void testSameCards()
   {
     boolean sameCards = false;
@@ -57,7 +58,7 @@ public class TestGame
     return card.getFace() == card1.getFace() && card.getSuit() == card1.getSuit();
   }
 
-  @org.junit.jupiter.api.Test
+  @Test
   public void testHandSize()
   {
     int handSize = 5;
@@ -69,7 +70,7 @@ public class TestGame
     }
   }
 
-  @org.junit.jupiter.api.Test
+  @Test
   public void testShuffled()
   {
     int noOffShuffled = 0;
@@ -93,5 +94,4 @@ public class TestGame
     Assertions.assertTrue(noOffShuffled < 5);
     Assertions.assertNotEquals(initialDeck,newDeck);
   }
-
 }

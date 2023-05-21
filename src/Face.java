@@ -1,27 +1,25 @@
 public enum Face
 {
-  ONE("A", 1, 1),
-  TWO("2", 2, 2),
-  THREE("3", 3, 3),
-  FOUR("4", 4, 4),
-  FIVE("5", 5, 5),
-  SIX("6", 6, 6),
-  SEVEN("7", 7, 7),
-  EIGHT("8", 8, 8),
-  NINE("9", 9, 9),
-  TEN("10", 10, 10),
-  JACK("J", 10, 11),
-  QUEEN("Q", 10, 12),
-  KING("K", 10, 13);
+  ONE("A", 1),
+  TWO("2", 2),
+  THREE("3",3),
+  FOUR("4", 4),
+  FIVE("5", 5),
+  SIX("6",6),
+  SEVEN("7",7),
+  EIGHT("8",8),
+  NINE("9",9),
+  TEN("10",10),
+  JACK("J",11),
+  QUEEN("Q",12),
+  KING("K", 13);
 
 
   private final String name;
-  private final int points;
   private final int rank;
 
-  Face(String name, int points, int rank)
+  Face(String name, int rank)
   {
-    this.points = points;
     this.name = name;
     this.rank = rank;
   }
@@ -36,11 +34,6 @@ public enum Face
   public String getName()
   {
     return name;
-  }
-
-  public int getPoints()
-  {
-    return points;
   }
 
   public int getRank()

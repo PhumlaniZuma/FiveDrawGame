@@ -5,7 +5,7 @@ public class Main
     Game game = new Game(2,5);
     game.deal();
     game.displayHand();
-    //game.deal();
-    //game.displayHand();
+    game.deal();
+    game.displayHand();
   }
 }
