@@ -23,6 +23,10 @@ public class Hand
     }
   }
 
+  /**
+   * @param index   off the place to add the new card
+   * @param newCard the new card to add
+   */
   public void setCard(int index, Card newCard)
   {
     if (index < this.handSize)
@@ -43,12 +47,18 @@ public class Hand
     }
   }
 
+  /**
+   * @return the Hand of one player
+   */
   public List<Card> getHands()
   {
     return hands;
   }
 
-  public void getHandValue()
+  /**
+   * print in the console the cards in the hand.
+   */
+  public void printHand()
   {
     evaluateHand();
     for (Card card : hands)
@@ -59,6 +69,11 @@ public class Hand
     System.out.println("");
   }
 
+  /**
+   * this is to sort out the cards in hand.
+   * we will check the Face rank and swap out the numbers on which is the lowest value.
+   * make use off a bubble sort
+   */
   public void sortHand()
   {
     boolean swapped;
@@ -80,6 +95,9 @@ public class Hand
     while (swapped);
   }
 
+  /**
+   * @param sameKind the number off same kind cards, to set the variables that will help the rank
+   */
   private void checkKindTypes(int sameKind)
   {
     if (sameKind > 0)
@@ -103,6 +121,9 @@ public class Hand
     }
   }
 
+  /**
+   * setting the rank.
+   */
   private void setHandRank()
   {
     if (inOrder && sameSuit)
@@ -143,6 +164,10 @@ public class Hand
     }
   }
 
+  /**
+   * this will start by sorting out the hand, and checking the rules off poker and setting the variable for that rule.
+   * used one loop while checking for all the rules.
+   */
   public void evaluateHand()
   {
     sortHand();
