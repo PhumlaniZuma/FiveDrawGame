@@ -46,10 +46,14 @@ public class Hand
     }
   }
 
+  public List<Card> getHands()
+  {
+    return hands;
+  }
+
   public void getHandValue()
   {
     evaluateHand();
-    setHandRank();
     for (Card card : hands)
     {
       System.out.print(card.getFace().getName() + "" + card.getSuit().getValue() + " ");
@@ -144,6 +148,7 @@ public class Hand
 
   public void evaluateHand()
   {
+    sortHand();
     threeOffAKind = false;
     twoOffAKind = false;
     fourOffAKind = false;
@@ -188,5 +193,11 @@ public class Hand
     {
       checkKindTypes(sameKind);
     }
+    setHandRank();
+  }
+
+  public Rank getHandRank()
+  {
+    return handRank;
   }
 }
