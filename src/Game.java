@@ -51,7 +51,6 @@ public class Game
   {
     for (Hand hand : players)
     {
-      hand.sortHand();
       hand.getHandValue();
     }
   }
@@ -68,5 +67,15 @@ public class Game
         deck_count++;
       }
     }
+  }
+
+  public List<Hand> getPlayers()
+  {
+    return players;
+  }
+
+  public Card[] getDeck()
+  {
+    return deck;
   }
 }
