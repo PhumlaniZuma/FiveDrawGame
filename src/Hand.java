@@ -11,7 +11,6 @@ public class Hand
   private boolean twoOffAKind = false;
   private boolean doubleTwoOffAKind = false;
   private boolean fourOffAKind = false;
-
   private Rank handRank;
 
   public Hand(int handSize)

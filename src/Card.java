@@ -10,8 +10,7 @@ public class Card
   }
 
   public Card()
-  {
-  }
+  {}
 
   public Suit getSuit()
   {

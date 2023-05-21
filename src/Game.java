@@ -13,14 +13,19 @@ public class Game
   private final int handSize;
   private final Card[] deck = new Card[DECK_SIZE];
 
-  public Game(int no_players,int handSize)
+  public Game(int no_players, int handSize)
   {
     this.handSize = handSize;
     this.players = new ArrayList<>(no_players);
-    for(int j = 0; j < no_players; j++)
+    for (int j = 0; j < no_players; j++)
     {
       players.add(new Hand(handSize));
     }
+    addDeckInitially();
+  }
+
+  private void addDeckInitially()
+  {
     int i = 0;
     for (Suit suit : Suit.ALL_SUIT_TYPES)
     {
@@ -38,19 +43,23 @@ public class Game
     while (i != NUMBER_OFF_TIMES_TO_SHUFFLE)
     {
       Random random = new Random();
-      int r = random.nextInt(DECK_SIZE - MIN_DECK_SIZE) + MIN_DECK_SIZE;
-      int j = random.nextInt(DECK_SIZE - MIN_DECK_SIZE) + MIN_DECK_SIZE;
-      Card card = deck[r];
-      deck[r] = deck[j];
-      deck[j] = card;
+      swapDeck(random.nextInt(DECK_SIZE - MIN_DECK_SIZE) + MIN_DECK_SIZE, random.nextInt(DECK_SIZE - MIN_DECK_SIZE) + MIN_DECK_SIZE);
       i++;
     }
+  }
+
+  private void swapDeck(int r, int j)
+  {
+    Card card = deck[r];
+    deck[r] = deck[j];
+    deck[j] = card;
   }
 
   public void displayHand()
   {
     for (Hand hand : players)
     {
+      hand.sortHand();
       hand.getHandValue();
     }
   }
@@ -63,7 +72,7 @@ public class Game
     {
       for (Hand hand : players)
       {
-        hand.setCard(i,deck[deck_count]);
+        hand.setCard(i, deck[deck_count]);
         deck_count++;
       }
     }
@@ -74,8 +83,5 @@ public class Game
     return players;
   }
 
-  public Card[] getDeck()
-  {
-    return deck;
-  }
+
 }
