@@ -15,40 +15,66 @@ public class Hand
 
   public Hand(int handSize)
   {
-    this.handSize = handSize;
-    this.hands = new ArrayList<>(handSize);
-    for (int j = 0; j < handSize; j++)
+
+    try
     {
-      hands.add(new Card());
+      this.handSize = handSize;
+      this.hands = new ArrayList<>(handSize);
+      for (int j = 0; handSize > j; j++)
+      {
+        hands.add(new Card());
+      }
     }
+    catch (IllegalArgumentException e)
+    {
+      throw new IllegalArgumentException("Invalid Size.");
+    }
+
   }
 
+  /**
+   * @param index   off the place to add the new card
+   * @param newCard the new card to add
+   */
   public void setCard(int index, Card newCard)
   {
-    if (index < this.handSize)
+    try
     {
-      Card card = hands.get(index);
-      if (card == null)
+      if (index < this.handSize)
       {
-        hands.add(index, newCard);
+        Card card = hands.get(index);
+        if (card == null)
+        {
+          hands.add(index, newCard);
+        }
+        else
+        {
+          this.hands.set(index, newCard);
+        }
       }
       else
       {
-        this.hands.set(index, newCard);
+        System.out.println("the hand you want to replace does not exist");
       }
     }
-    else
+    catch (IndexOutOfBoundsException e)
     {
-      System.out.println("the hand you want to replace does not exist");
+      throw new IndexOutOfBoundsException("index that you trying to set is not available");
     }
   }
 
+  /**
+   * @return the Hand of one player
+   */
   public List<Card> getHands()
   {
     return hands;
   }
 
-  public void getHandValue()
+  /**
+   * print in the console the cards in the hand.
+   */
+  public void printHand()
   {
     evaluateHand();
     for (Card card : hands)
@@ -59,6 +85,11 @@ public class Hand
     System.out.println("");
   }
 
+  /**
+   * this is to sort out the cards in hand.
+   * we will check the Face rank and swap out the numbers on which is the lowest value.
+   * make use off a bubble sort
+   */
   public void sortHand()
   {
     boolean swapped;
@@ -80,29 +111,33 @@ public class Hand
     while (swapped);
   }
 
+  /**
+   * @param sameKind the number off same kind cards, to set the variables that will help the rank
+   */
   private void checkKindTypes(int sameKind)
   {
-    if (sameKind > 0)
+    switch (sameKind)
     {
-      if (sameKind == 2)
-      {
+      case 2:
         threeOffAKind = true;
-      }
-      else if (sameKind == 1)
-      {
+        break;
+      case 1:
         if (twoOffAKind)
         {
           doubleTwoOffAKind = true;
         }
         twoOffAKind = true;
-      }
-      else if (sameKind == 3)
-      {
+        break;
+      case 3:
         fourOffAKind = true;
-      }
+        break;
+
     }
   }
 
+  /**
+   * setting the rank.
+   */
   private void setHandRank()
   {
     if (inOrder && sameSuit)
@@ -143,6 +178,10 @@ public class Hand
     }
   }
 
+  /**
+   * this will start by sorting out the hand, and checking the rules off poker and setting the variable for that rule.
+   * used one loop while checking for all the rules.
+   */
   public void evaluateHand()
   {
     sortHand();

@@ -21,10 +21,13 @@ public class Game
     {
       players.add(new Hand(handSize));
     }
-    addDeckInitially();
+    addDeckInitialValues();
   }
 
-  private void addDeckInitially()
+  /**
+   * this is to add the initial values of the deck, this will be in order off they input.
+   */
+  private void addDeckInitialValues()
   {
     int i = 0;
     for (Suit suit : Suit.ALL_SUIT_TYPES)
@@ -37,6 +40,10 @@ public class Game
     }
   }
 
+  /**
+   * this is to shuffle the deck as it is add in order it will be predictable off which will come first
+   * by shuffling the deck we will make it so that there is not order in the deck and can not be predictable.
+   */
   public void Shuffle()
   {
     int i = 0;
@@ -48,6 +55,12 @@ public class Game
     }
   }
 
+  /**
+   * swapping cards in the deck
+   *
+   * @param r the index that will be swapped with J
+   * @param j the index that will be swapped with r
+   */
   private void swapDeck(int r, int j)
   {
     Card card = deck[r];
@@ -55,15 +68,20 @@ public class Game
     deck[j] = card;
   }
 
+  /**
+   * this is to print out the value off each hand that is in the game.
+   */
   public void displayHand()
   {
     for (Hand hand : players)
     {
-      hand.sortHand();
-      hand.getHandValue();
+      hand.printHand();
     }
   }
 
+  /**
+   * this is to set each hand in play, it will add one card from the to each player till all players have all cards
+   */
   public void deal()
   {
     Shuffle();
@@ -78,10 +96,19 @@ public class Game
     }
   }
 
+  /**
+   * @return get the list off Hands, which are players
+   */
   public List<Hand> getPlayers()
   {
     return players;
   }
 
-
+  /**
+   * @return this is the cards that will be played with and server each player.
+   */
+  public Card[] getDeck()
+  {
+    return deck;
+  }
 }
