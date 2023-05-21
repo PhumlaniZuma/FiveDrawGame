@@ -83,5 +83,8 @@ public class Game
     return players;
   }
 
-
+  public Card[] getDeck()
+  {
+    return deck;
+  }
 }
